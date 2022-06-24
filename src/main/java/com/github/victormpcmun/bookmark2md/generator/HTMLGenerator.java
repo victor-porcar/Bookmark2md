@@ -36,29 +36,35 @@ public class HTMLGenerator {
         for (Item item : bookmarkFolder.getItemList()) {
 
             if (item.isBookmarkLink()) {
-                BookmarkLink bookmarkLink = (BookmarkLink) item;
-                String line;
-
-                String formattedText = bookmarkLink.getText();
-
-                formattedText = GeneratorFormatter.replaceBold(formattedText, s -> "<span class=\"bold-text\">" + s + "</span>");
-                formattedText = GeneratorFormatter.replaceItalic(formattedText, s -> "<span class=\"italic-text\">" + s + "</span>");
-                formattedText = GeneratorFormatter.replaceBoldItalic(formattedText, s -> "<span class=\"bolditalic-text\">" + s + "</span>");
-
-                String image =calculateImage(bookmarkLink);
-
-                line = "<DT><IMG SRC=\"" + image + "\"" + " ><A HREF=\"" + bookmarkLink.getUrl() + "\">" + formattedText + "</A>";
-
-                outputTextDocument.addTextLine(spacesLeftChildren + line);
-
+                processBookmarkLink((BookmarkLink) item, outputTextDocument, spacesLeftChildren);
             } else if (item.isFolder()) {
-                BookmarkFolder bookmarkFolderChild = (BookmarkFolder) item;
-                outputTextDocument.addTextDocument(calculateOutputTextDocument(bookmarkFolderChild, 3));
+                processBookmarkFolder((BookmarkFolder) item, outputTextDocument);
             }
         }
 
         outputTextDocument.addTextLine(spacesLeftFolder + "</DL><p>");
         return outputTextDocument;
+    }
+
+    private void processBookmarkLink(BookmarkLink bookmarkLink, TextDocument outputTextDocument, String spacesLeft) {
+        String line;
+
+        String formattedText = bookmarkLink.getText();
+
+        formattedText = GeneratorFormatter.replaceBold(formattedText, s -> "<span class=\"bold-text\">" + s + "</span>");
+        formattedText = GeneratorFormatter.replaceItalic(formattedText, s -> "<span class=\"italic-text\">" + s + "</span>");
+        formattedText = GeneratorFormatter.replaceBoldItalic(formattedText, s -> "<span class=\"bolditalic-text\">" + s + "</span>");
+
+        String image =calculateImage(bookmarkLink);
+
+        line = "<DT><IMG SRC=\"" + image + "\"" + " ><A HREF=\"" + bookmarkLink.getUrl() + "\">" + formattedText + "</A>";
+
+        outputTextDocument.addTextLine(spacesLeft + line);
+    }
+
+
+    private void processBookmarkFolder(BookmarkFolder bookmarkFolder, TextDocument outputTextDocument) {
+        outputTextDocument.addTextDocument(calculateOutputTextDocument(bookmarkFolder, 3));
     }
 
     private String calculateSpacesLeft(int level) {
