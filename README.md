@@ -7,7 +7,7 @@ This is yet another converter from standard browser bookmark html file (*NETSCAP
 * Raw importable HTML *NETSCAPE-Bookmark-file-1" DOCTYPE*
 
 
-See `./src/main/resources/usage.txt` for usage details
+See `/src/main/resources/usage.txt` for usage details
 
 
 ### Build
