@@ -1,18 +1,18 @@
 ## Bookmark2md
 
-This is yet another converter from *NETSCAPE-Bookmark-file-1" DOCTYPE* to:
+This is yet another converter from standard browser bookmark html file (*NETSCAPE-Bookmark-file-1" DOCTYPE*) to: 
 
 * Markdown (.md)
 * Pretty HTML
 * Raw importable HTML *NETSCAPE-Bookmark-file-1" DOCTYPE*
 
 
-It works by converting all the bookmark hierarchy from the first bookmark subfolder having the given name. See `./resources/usage.txt` for details
+See `./resources/usage.txt` for usage details
 
 
 ### Build
 
-Generate jar (in **/dist** bookmarkFolder)
+Generate jar (in **/dist** )
 
 ```	
 git clone https://github.com/victormpcmun/bookmark2md	
