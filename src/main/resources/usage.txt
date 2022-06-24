@@ -1,0 +1,28 @@
+
+USAGE
+
+java -jar dist/bookmark2md.jar <BOOKMARK_INPUT_FILE> <BOOKMARK_SUBFOLDER_NAME> <OUTPUT_FOLDER> <OUTPUT_MD_FILE> <OUTPUT_PRETTY_HTML_FILE> <OUTPUT_RAW_BOOKMARK_EXPORT_FILE>
+
+Where
+
+- BOOKMARK_INPUT_FILE is the path to the raw html file exported right from the browser
+- BOOKMARK_SUBFOLDER_NAME is the bookmark subfolder name to convert (case-sensitive).
+- OUTPUT_FOLDER is the destination bookmarkFolder where the generated files will be saved.
+- OUTPUT_MD_FILE is the generated markdown file .md
+- OUTPUT_PRETTY_HTML_FILE is the generated pretty HTML file .html
+- OUTPUT_RAW_BOOKMARK_EXPORT_FILE is the generated "NETSCAPE-Bookmark-file-1" DOCTYPE compliant file to be imported in any browser
+
+
+example
+
+java -jar ./dist/Bookmark2md.jar ./bookmarks_22_05_22.html TECHNICAL ./OUTPUT_FOLDER  technical_bookmarks.md technical_bookmarks.html technical_bookmarks_to_import.html
+
+
+NOTE
+
+The bookmark text may be formatted as follows:
+
+text between * is rendered in italic
+text between ** is rendered in bold
+text between *** is rendered in italic and bold
+
