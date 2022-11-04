@@ -7,12 +7,14 @@ public class Parameters {
 
     private final static Parameters NOT_VALID = new Parameters(false);
 
-    private String bookmarkSubFolderName;
-    private String destinationFolder;
-    private String bookmarkInputFile;
+
+    private String bookmarkHtmlFile;
+    private String outputFolder;
     private String mdOutputFile;
-    private String htmlOutputFile;
-    private String rawHtmlOuputFile;
+    private String htmlPrettyOutputFile;
+    private String rawHtmlOutputFile;
+    private String folderName;
+
     private final boolean valid;
 
     private Parameters(boolean valid) {
@@ -21,15 +23,14 @@ public class Parameters {
 
     public static Parameters build(String[] args) {
 
-        if (args.length == 6) {
+        if (args.length==6) {
             Parameters parameters = new Parameters(true);
-            parameters.bookmarkInputFile = args[0];
-            parameters.bookmarkSubFolderName = args[1];
-            parameters.destinationFolder = args[2];
-
-            parameters.mdOutputFile = args[3];
-            parameters.htmlOutputFile = args[4];
-            parameters.rawHtmlOuputFile = args[5];
+            parameters.bookmarkHtmlFile = args[0];
+            parameters.outputFolder = args[1];
+            parameters.mdOutputFile = args[2];
+            parameters.htmlPrettyOutputFile = args[3];
+            parameters.rawHtmlOutputFile = args[4];
+            parameters.folderName = args[5];
             return parameters;
         } else {
             return NOT_VALID;
@@ -40,44 +41,45 @@ public class Parameters {
         return valid;
     }
 
-    public String getBookmarkSubFolderName() {
-        return bookmarkSubFolderName;
+    public String getFolderName() {
+        return folderName;
     }
 
-    public String getDestinationFolder() {
-        return destinationFolder;
+    public String getOutputFolder() {
+        return outputFolder;
     }
 
-    public String getBookmarkInputFile() {
-        return bookmarkInputFile;
-    }
-
-    @Override
-    public String toString() {
-        return "Parameters{" +
-                "bookmarkFolderName='" + bookmarkSubFolderName + '\'' +
-                ", destinationFolder='" + destinationFolder + '\'' +
-                ", bookmarkInputFile='" + bookmarkInputFile + '\'' +
-                ", mdOutputFile='" + mdOutputFile + '\'' +
-                ", htmlOutputFile='" + htmlOutputFile + '\'' +
-                ", rawHtmlOuputFile='" + rawHtmlOuputFile + '\'' +
-                ", valid=" + valid +
-                '}';
+    public String getBookmarkHtmlFile() {
+        return bookmarkHtmlFile;
     }
 
     public String getMdOutputFilePath() {
         return calculatePath(mdOutputFile);
     }
 
-    public String getHtmlOutputFilePath() {
-        return calculatePath(htmlOutputFile);
+    public String getHtmlPrettyOutputFile() {
+        return calculatePath(htmlPrettyOutputFile);
     }
 
-    public String getRawHtmlOuputFilePath() {
-        return calculatePath(rawHtmlOuputFile);
+    public String getRawHtmlOutputFilePath() {
+        return calculatePath(rawHtmlOutputFile);
     }
 
     private String calculatePath(String fileName) {
-        return getDestinationFolder() + File.separator + fileName;
+        return getOutputFolder() + File.separator + fileName;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Parameters{" +
+                "bookmarkHtmlFile='" + bookmarkHtmlFile + '\'' +
+                ", outputFolder='" + outputFolder + '\'' +
+                ", mdOutputFile='" + mdOutputFile + '\'' +
+                ", htmlPrettyOutputFile='" + htmlPrettyOutputFile + '\'' +
+                ", rawHtmlOutputFile='" + rawHtmlOutputFile + '\'' +
+                ", folderName='" + folderName + '\'' +
+                ", valid=" + valid +
+                '}';
     }
 }

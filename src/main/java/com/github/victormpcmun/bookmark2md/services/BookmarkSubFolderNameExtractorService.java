@@ -6,6 +6,10 @@ public class BookmarkSubFolderNameExtractorService {
 
     public static final BookmarkSubFolderNameExtractorService INSTANCE = new BookmarkSubFolderNameExtractorService();
 
+    public TextDocument getLinesForAllBookmarks(TextDocument bookmarkFileTextDocument) {
+        return null;
+    }
+
     public TextDocument getLinesForBookmarkFolder(TextDocument bookmarkFileTextDocument, String bookmarkSubFolderName) {
 
         TextDocument textDocument = TextDocument.build();

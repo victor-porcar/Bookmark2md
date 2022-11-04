@@ -21,17 +21,15 @@ public class FileProcessorService {
     public void go(Parameters parameters) {
         log.info("Beginning conversion process with parameters:" + parameters);
 
-        String bookmarkSubFolderName = parameters.getBookmarkSubFolderName();
-        String bookmarkInputFile = parameters.getBookmarkInputFile();
-        TextDocument fullBookmarkFileTextDocument = FileService.INSTANCE.readFileAsTextDocument(bookmarkInputFile);
 
+        String bookmarkHtmlFile = parameters.getBookmarkHtmlFile();
+        TextDocument fullBookmarkFileTextDocument = FileService.INSTANCE.readFileAsTextDocument(bookmarkHtmlFile);
         TextDocument fullBookmarkFileTextDocumentTabSafe = fullBookmarkFileTextDocument.replaceTabsForSpaces(NUMBER_OF_SPACES_FOR_TAB);
-
-
-        TextDocument bookmarkFileTextDocument = BookmarkSubFolderNameExtractorService.INSTANCE.getLinesForBookmarkFolder(fullBookmarkFileTextDocumentTabSafe, bookmarkSubFolderName);
+        String folderName = parameters.getFolderName();
+        TextDocument  bookmarkFileTextDocument = BookmarkSubFolderNameExtractorService.INSTANCE.getLinesForBookmarkFolder(fullBookmarkFileTextDocumentTabSafe, folderName);
 
         if (bookmarkFileTextDocument.isEmpty()) {
-            log.error("Bookmark subfolder name \"" + bookmarkSubFolderName + "\" is not found on file " + bookmarkInputFile + ". Please note that is case-sensitive.");
+            log.error("No bookmarks to convert found, perhaps the folderName is not correct (it is case-sensitive)" + bookmarkHtmlFile);
             return;
         }
 
@@ -47,7 +45,7 @@ public class FileProcessorService {
         TextDocument linesToBeRendered = bookmarkFileTextDocument.getSubDocument(1);
 
         //--------------
-        String bookmarkFolderName = parameters.getBookmarkSubFolderName();
+        String bookmarkFolderName = parameters.getFolderName();
         BookmarkFolder bookmarkFolder = RenderItemService.INSTANCE.render(linesToBeRendered, bookmarkFolderName);
 
         // md
@@ -57,12 +55,12 @@ public class FileProcessorService {
 
         // html
         TextDocument outputTextDocumentHTML = HTMLGenerator.INSTANCE.generate(bookmarkFolder);
-        FileService.INSTANCE.writeFile(parameters.getHtmlOutputFilePath(), outputTextDocumentHTML);
+        FileService.INSTANCE.writeFile(parameters.getHtmlPrettyOutputFile(), outputTextDocumentHTML);
 
 
         // raw html
         TextDocument rawHtmlOutputTextDocument = RawHTMLGenerator.INSTANCE.generate(bookmarkFileTextDocument);
-        FileService.INSTANCE.writeFile(parameters.getRawHtmlOuputFilePath(), rawHtmlOutputTextDocument);
+        FileService.INSTANCE.writeFile(parameters.getRawHtmlOutputFilePath(), rawHtmlOutputTextDocument);
 
     }
 }
