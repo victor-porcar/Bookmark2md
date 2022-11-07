@@ -9,7 +9,7 @@ This is a converter from exported browser bookmarks (as html) into:
 
 ### Usage
 
-The application is built as a executable java jar component that requires 6 mandatory parameters
+The application is built as an executable java jar component that requires 6 mandatory parameters
 
 ```	
 java -jar dist/bookmark2md.jar <BOOKMARK_HTML> <OUTPUT_FOLDER> <OUTPUT_MD_FILE> <OUTPUT_PRETTY_HTML_FILE> <OUTPUT_RAW_BOOKMARK_EXPORT_FILE> <FOLDER_NAME>
@@ -21,9 +21,9 @@ Where
   - in Firefox you can export this file in *Bookmark* -> *Manage Bookmarks* -> *Import and Backup* -> *Export Bookmarks to HTML ...*
   
 - OUTPUT_FOLDER is the absolute or relative destination folder where the generated files will be created
-- OUTPUT_MD_FILE is the generated markdown file .md name
-- OUTPUT_PRETTY_HTML_FILE is the generated pretty HTML file .html name
-- OUTPUT_RAW_BOOKMARK_EXPORT_FILE is the generated "NETSCAPE-Bookmark-file-1" DOCTYPE compliant file name ready to be imported in any browser
+- OUTPUT_MD_FILE is the generated markdown file .md name (created in <OUTPUT_FOLDER>)
+- OUTPUT_PRETTY_HTML_FILE is the generated pretty HTML file .html name (created in <OUTPUT_FOLDER>)
+- OUTPUT_RAW_BOOKMARK_EXPORT_FILE is the generated "NETSCAPE-Bookmark-file-1" DOCTYPE compliant file name ready to be imported in any browser (created in <OUTPUT_FOLDER>)
 - FOLDER_NAME this parameter is the case-sensitive bookmark folder name for the conversion. The conversion will include the bookmarks belonging to this folder and its folder children recursively
 
 
