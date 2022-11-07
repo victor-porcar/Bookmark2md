@@ -9,7 +9,7 @@ This is a converter from exported browser bookmarks (as html) into:
 
 ### Usage
 
-It is easy, the application is just a java jar component that requires 6 mandatory parameters
+The application is just a java jar component that requires 6 mandatory parameters
 
 ```	
 java -jar dist/bookmark2md.jar <BOOKMARK_HTML> <OUTPUT_FOLDER> <OUTPUT_MD_FILE> <OUTPUT_PRETTY_HTML_FILE> <OUTPUT_RAW_BOOKMARK_EXPORT_FILE> <FOLDER_NAME>
