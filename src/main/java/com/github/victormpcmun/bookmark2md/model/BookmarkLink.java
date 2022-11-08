@@ -36,10 +36,6 @@ public class BookmarkLink extends Item {
         return text;
     }
 
-    public int getLevel() {
-        return bookmarkFolderHierarchyList.size() + 1;
-    }
-
     public String getUrl() {
         return url;
     }

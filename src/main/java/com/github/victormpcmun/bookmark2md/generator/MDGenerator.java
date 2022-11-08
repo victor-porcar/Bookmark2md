@@ -28,14 +28,8 @@ public class MDGenerator {
 
             if (item.isBookmarkLink()) {
                 BookmarkLink bookmarkLink = (BookmarkLink) item;
-
                 String line = renderBookmarkLink(bookmarkLink, spacesLeftChildren);
-                String unsupportedCharactersReplacement = replaceUnsupportedCharacters(line);
-
-
-                String formattedLine = unsupportedCharactersReplacement; // no need in formatting line as it is already markdown syntax
-                // String formattedLine = format(unsupportedCharactersReplacement);
-
+                String formattedLine = replaceUnsupportedCharacters(line);
                 outputTextDocument.addTextLine(formattedLine);
 
             } else if (item.isFolder()) {
@@ -62,10 +56,4 @@ public class MDGenerator {
         return s.replace("|", "-");
     }
 
-    private String format(String line) {
-        String formattedLine = GeneratorFormatter.replaceBold(line, s -> "**" + s + "**");
-        formattedLine = GeneratorFormatter.replaceItalic(formattedLine, s -> "*" + s + "*");
-        formattedLine = GeneratorFormatter.replaceBoldItalic(formattedLine, s -> "***" + s + "***");
-        return formattedLine;
-    }
 }

@@ -24,9 +24,10 @@ public class FileProcessorService {
 
         String bookmarkHtmlFile = parameters.getBookmarkHtmlFile();
         TextDocument fullBookmarkFileTextDocument = FileService.INSTANCE.readFileAsTextDocument(bookmarkHtmlFile);
-        TextDocument fullBookmarkFileTextDocumentTabSafe = fullBookmarkFileTextDocument.replaceTabsForSpaces(NUMBER_OF_SPACES_FOR_TAB);
+        fullBookmarkFileTextDocument.replaceTabsForSpaces(NUMBER_OF_SPACES_FOR_TAB);   //  make it tab safe
+
         String folderName = parameters.getFolderName();
-        TextDocument  bookmarkFileTextDocument = BookmarkSubFolderNameExtractorService.INSTANCE.getLinesForBookmarkFolder(fullBookmarkFileTextDocumentTabSafe, folderName);
+        TextDocument  bookmarkFileTextDocument = BookmarkSubFolderNameExtractorService.INSTANCE.getLinesForBookmarkFolder(fullBookmarkFileTextDocument, folderName);
 
         if (bookmarkFileTextDocument.isEmpty()) {
             log.error("No bookmarks to convert found, perhaps the folderName is not correct (it is case-sensitive)" + bookmarkHtmlFile);
@@ -54,7 +55,8 @@ public class FileProcessorService {
 
 
         // html
-        TextDocument outputTextDocumentHTML = HTMLGenerator.INSTANCE.generate(bookmarkFolder);
+        String title = parameters.getFolderName();
+        TextDocument outputTextDocumentHTML = HTMLGenerator.INSTANCE.generate(bookmarkFolder, title);
         FileService.INSTANCE.writeFile(parameters.getHtmlPrettyOutputFile(), outputTextDocumentHTML);
 
 

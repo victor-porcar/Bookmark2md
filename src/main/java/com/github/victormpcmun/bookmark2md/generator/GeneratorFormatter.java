@@ -24,25 +24,25 @@ public class GeneratorFormatter {
 
         boolean foundReplacement;
         int index = 0;
-        int s1Posi;
-        int s2Posi;
+        int s1Position;
+        int s2Position;
 
         do {
-            s1Posi = getIndexOfIgnoringOnLeft(s, s1, index);
+            s1Position = getIndexOfIgnoringOnLeft(s, s1, index);
 
-            if (s1Posi >= 0) {
-                s2Posi = getIndexOfIgnoringOnLeft(s, s2, s1Posi + s1.length() + 1);
+            if (s1Position >= 0) {
+                s2Position = getIndexOfIgnoringOnLeft(s, s2, s1Position + s1.length() + 1);
             } else {
-                s2Posi = -1;
+                s2Position = -1;
             }
-            foundReplacement = s1Posi >= 0 && s2Posi > s1Posi;
+            foundReplacement = s1Position >= 0 && s2Position > s1Position;
 
             if (foundReplacement) {
-                result.append(s, index, s1Posi);
-                String wordToReplace = s.substring(s1Posi + s1.length(), s2Posi);
+                result.append(s, index, s1Position);
+                String wordToReplace = s.substring(s1Position + s1.length(), s2Position);
                 String replacement = replacementFunction.apply(wordToReplace);
                 result.append(replacement);
-                index = s2Posi + s2.length();
+                index = s2Position + s2.length();
             } else {
                 result.append(s.substring(index));
             }

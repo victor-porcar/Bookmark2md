@@ -3,6 +3,7 @@ package com.github.victormpcmun.bookmark2md.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TextDocument {
 
@@ -59,16 +60,32 @@ public class TextDocument {
     }
 
 
-    public TextDocument replaceTabsForSpaces(int numberOfSpaces) {
+    public void replaceTabsForSpaces(int numberOfSpaces) {
         String replacement = new String(new char[numberOfSpaces]).replace("\0", " ");
-        TextDocument newDocument = build();
-
-        for (String line:getLinesList()) {
-            String replacedLine = line.replaceAll("\\t", replacement);
-            newDocument.addTextLine(replacedLine);
-        }
-        return newDocument;
+        replaceSubString("\t", replacement);
     }
 
+
+    public void replaceWholeLineContainingSubstring(String substring, TextDocument bookmarkFileTextDocument) {
+        List<String> newLinesList = new ArrayList<>();
+        for (String line:linesList) {
+            if (line.contains(substring)) {
+                newLinesList.addAll(bookmarkFileTextDocument.getLinesList());
+            } else {
+                newLinesList.add(line);
+            }
+        }
+        linesList=newLinesList;
+    }
+
+    public void replaceSubString(String substring, String replacement) {
+        for (int indexLines=0; indexLines< linesList.size(); indexLines++) {
+            String line = linesList.get(indexLines);
+            if (line.contains(substring)) {
+                String lineReplacement = line.replaceAll(Pattern.quote(substring), replacement);
+                linesList.set(indexLines, lineReplacement);
+            }
+        }
+    }
 
 }

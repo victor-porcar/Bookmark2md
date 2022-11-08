@@ -7,7 +7,6 @@ public class Parameters {
 
     private final static Parameters NOT_VALID = new Parameters(false);
 
-
     private String bookmarkHtmlFile;
     private String outputFolder;
     private String mdOutputFile;

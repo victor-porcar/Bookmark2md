@@ -14,9 +14,9 @@ public class HTMLGenerator {
 
     public static final HTMLGenerator INSTANCE = new HTMLGenerator();
 
-    public TextDocument generate(BookmarkFolder rootBookmarkFolder) {
+    public TextDocument generate(BookmarkFolder rootBookmarkFolder, String title) {
         TextDocument outputTextDocument = calculateOutputTextDocument(rootBookmarkFolder);
-        return TemplateService.INSTANCE.applyTemplate("HTMLTemplate.html", outputTextDocument);
+        return TemplateService.INSTANCE.applyTemplate("HTMLTemplate.html", outputTextDocument, title);
     }
 
     private TextDocument calculateOutputTextDocument(BookmarkFolder rootBookmarkFolder) {
