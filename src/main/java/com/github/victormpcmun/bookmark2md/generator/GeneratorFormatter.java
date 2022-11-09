@@ -4,17 +4,26 @@ import java.util.function.UnaryOperator;
 
 public class GeneratorFormatter {
 
+    private static final String BOLD_BEGIN="**";
+    private static final String BOLD_END="**";
+
+    private static final String ITALIC_BEGIN="*";
+    private static final String ITALIC_END="*";
+
+    private static final String BOLD_ITALIC_BEGIN="***";
+    private static final String BOLD_ITALIC_END="***";
+    
 
     public static String replaceBold(String s, UnaryOperator<String> replacementFunctionBold) {
-        return replaceInBetween(s, "**", "**", replacementFunctionBold);
+        return replaceInBetween(s, BOLD_BEGIN, BOLD_END, replacementFunctionBold);
     }
 
     public static String replaceItalic(String s, UnaryOperator<String> replacementFunctionItalic) {
-        return replaceInBetween(s, "*", "*", replacementFunctionItalic);
+        return replaceInBetween(s, ITALIC_BEGIN, ITALIC_END, replacementFunctionItalic);
     }
 
     public static String replaceBoldItalic(String s, UnaryOperator<String> replacementFunctionBoldItalic) {
-        return replaceInBetween(s, "***", "***", replacementFunctionBoldItalic);
+        return replaceInBetween(s, BOLD_ITALIC_BEGIN, BOLD_ITALIC_END, replacementFunctionBoldItalic);
     }
 
 
@@ -53,7 +62,7 @@ public class GeneratorFormatter {
         return result.toString();
     }
 
-    public static int getIndexOfIgnoringOnLeft(String string, String search, int countToIgnoreFromLeft) {
+    private static int getIndexOfIgnoringOnLeft(String string, String search, int countToIgnoreFromLeft) {
         int stringSize = string.length();
         if (stringSize <= countToIgnoreFromLeft) {
             return -1;

@@ -11,12 +11,13 @@ import java.util.Collections;
 public class HTMLGenerator {
 
     private static final String TINIEST_IMAGE="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    private static final String HTML_TEMPLATE_FILE_NAME ="HTMLTemplate.html";
 
     public static final HTMLGenerator INSTANCE = new HTMLGenerator();
 
     public TextDocument generate(BookmarkFolder rootBookmarkFolder, String title) {
         TextDocument outputTextDocument = calculateOutputTextDocument(rootBookmarkFolder);
-        return TemplateService.INSTANCE.applyTemplate("HTMLTemplate.html", outputTextDocument, title);
+        return TemplateService.INSTANCE.applyTemplate(HTML_TEMPLATE_FILE_NAME, outputTextDocument, title);
     }
 
     private TextDocument calculateOutputTextDocument(BookmarkFolder rootBookmarkFolder) {

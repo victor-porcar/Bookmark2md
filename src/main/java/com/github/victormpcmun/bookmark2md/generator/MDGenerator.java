@@ -9,11 +9,13 @@ import com.github.victormpcmun.bookmark2md.services.TemplateService;
 import java.util.Collections;
 
 public class MDGenerator {
+
+    private static final String MD_TEMPLATE_FILE_NAME ="MDTemplate.md";
     public static final MDGenerator INSTANCE = new MDGenerator();
 
     public TextDocument generate(BookmarkFolder rootBookmarkFolder) {
         TextDocument outputTextDocument = calculateOutputLines(rootBookmarkFolder);
-        return TemplateService.INSTANCE.applyTemplate("MDTemplate.md", outputTextDocument);
+        return TemplateService.INSTANCE.applyTemplate(MD_TEMPLATE_FILE_NAME, outputTextDocument);
     }
 
     private TextDocument calculateOutputLines(BookmarkFolder bookmarkFolder) {

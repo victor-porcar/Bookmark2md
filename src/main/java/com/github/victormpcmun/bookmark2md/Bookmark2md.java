@@ -26,7 +26,7 @@ public class Bookmark2md {
 
     private void validateParametersOrExit(Parameters parameters) {
         if (!parameters.isValidParameters()) {
-            log.error("Error: Parameters not valid");
+            log.error("Error: Parameters not valid. See Documentation");
             System.exit(-1);
         }
     }
