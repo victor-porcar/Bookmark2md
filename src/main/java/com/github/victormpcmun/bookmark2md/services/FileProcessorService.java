@@ -30,7 +30,7 @@ public class FileProcessorService {
         TextDocument  bookmarkFileTextDocument = BookmarkSubFolderNameExtractorService.INSTANCE.getLinesForBookmarkFolder(fullBookmarkFileTextDocument, folderName);
 
         if (bookmarkFileTextDocument.isEmpty()) {
-            log.error("No bookmarks to convert found, perhaps the folderName is not correct (it is case-sensitive)" + bookmarkHtmlFile);
+            log.error("No bookmarks to convert found, perhaps the given folderName {} does not exit in {}. Please note that it is case-sensitive", folderName, bookmarkHtmlFile);
             return;
         }
 
